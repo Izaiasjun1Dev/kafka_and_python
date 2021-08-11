@@ -20,6 +20,14 @@ for message in consumer:
     texto = json.loads(message.value.decode('utf-8'))
     frases = frase + texto['tweet']
     list_twitter.append(frases)
-    print(list_twitter)
+    clear_output()
+    wordcloud = WordCloud(
+        max_font_size=100, 
+        width = 1520, 
+        height = 535).generate(frases)
+    plt.figure(figsize=(16,9))
+    plt.imshow(wordcloud)
+    plt.axis("off")
+    plt.show()
 
     

@@ -1,14 +1,17 @@
 import tweepy
+import os
 from dotenv import (
     load_dotenv, find_dotenv)
 from datetime import datetime
 from json import dumps
 from kafka import KafkaProducer
 
-consumer_key = 'sGQILZrjvzZ9an1z7geMkDCd5'
-consumer_secret = 'teqBAfvMiEeXgy4sigeSDl5GdA8iLvOg4Y1mT7W7k3XD363K6P'
-access_token = '1405683717851467779-s1cBXnJ3rJwvabMxapDUtGwe3yAZsg'
-access_token_secret = 'TCTiP3Z3Il6Xr4dmSDafXjuhAQ9yoEfB61Th0yyzoKepV'
+load_dotenv(find_dotenv())
+
+consumer_key = os.environ.get("CONSUMER_KEY")
+consumer_secret = os.environ.get("CONSUMER_SECRET")
+access_token = os.environ.get("ACCESS_TOKEN")
+access_token_secret = os.environ.get("ACCESS_TOKEN_SECRET")
 
 broker = 'localhost:9092'
 topico = 'scraping-twitter'
@@ -21,8 +24,6 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 twitts = api.search('Alura')
-
-
 
 for i in twitts:
     frase = str(i.text)
