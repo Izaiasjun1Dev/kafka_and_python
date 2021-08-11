@@ -1,0 +1,4 @@
+*zk-single-kfka-single/
+*venv/
+*.vscode/
+*myid
